@@ -1,6 +1,7 @@
 import ctypes
 import time
 import requests
+import html
 from xml.etree import ElementTree
 
 # ---- LCD SETUP ----
@@ -35,6 +36,7 @@ def progress_bar(current, total, length=28):
 def scroll_text(text, width=30):
     global scroll_index
 
+    text = html.unescape(text).replace("'", "`")
     if len(text) <= width:
         return text.ljust(width)
 
@@ -45,6 +47,7 @@ def scroll_text(text, width=30):
 
     scroll_index += 1
     return visible
+    
 
 
 def get_vlc_info():
